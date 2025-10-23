@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "title": "Test Fix itext.text.includes",
+    "author": "AI Developer",
+    "company": "GenSpark",
+    "fileName": "test-fix-includes.pptx"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": "Test Fix de l'Erreur includes",
+      "subtitle": "Vérification bullets et twoColumn"
+    },
+    {
+      "type": "content",
+      "title": "Test Bullets Standard",
+      "bullets": [
+        "Premier bullet simple",
+        "Deuxième bullet avec du texte",
+        "Troisième bullet pour tester"
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Test Bullets Longs (Troncature)",
+      "bullets": [
+        "Ce bullet contient beaucoup trop de mots et devrait être tronqué automatiquement à quinze mots maximum pour respecter les bonnes pratiques de présentation professionnelle",
+        "Bullet normal court",
+        "Encore un bullet avec plusieurs mots mais pas trop long donc pas de troncature"
+      ]
+    },
+    {
+      "type": "twoColumn",
+      "title": "Test Two Column",
+      "leftContent": [
+        "Point gauche 1",
+        "Point gauche 2",
+        "Point gauche 3"
+      ],
+      "rightContent": [
+        "Point droit 1",
+        "Point droit 2",
+        "Point droit 3"
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Test Limite 5 Bullets",
+      "bullets": [
+        "Bullet 1 visible",
+        "Bullet 2 visible",
+        "Bullet 3 visible",
+        "Bullet 4 visible",
+        "Bullet 5 visible",
+        "Bullet 6 devrait être ignoré",
+        "Bullet 7 devrait être ignoré"
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Test Tableau",
+      "tableData": [
+        ["Colonne 1", "Colonne 2", "Colonne 3"],
+        ["Donnée A1", "Donnée A2", "Donnée A3"],
+        ["Donnée B1", "Donnée B2", "Donnée B3"]
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Conclusion",
+      "bullets": [
+        "Fix appliqué sur createContentSlide",
+        "Fix appliqué sur createTwoColumnSlide",
+        "Structure options corrigée",
+        "Génération devrait fonctionner sans erreur"
+      ]
+    }
+  ]
+}

@@ -8611,7 +8611,7 @@ function createContentSlide(slide, data) {
     const truncated = truncateToWords(String(b), 15);
     return {
       text: truncated,
-      options: { bullet: true, fontSize: 18, color: '333333' }
+      options: { bullet: true }
     };
   });
   
@@ -8638,12 +8638,12 @@ function createTwoColumnSlide(slide, data) {
   
   const leftText = data.leftContent.map(t => ({
     text: String(t),
-    options: { bullet: true, fontSize: 16, color: '333333' }
+    options: { bullet: true }
   }));
   
   const rightText = data.rightContent.map(t => ({
     text: String(t),
-    options: { bullet: true, fontSize: 16, color: '333333' }
+    options: { bullet: true }
   }));
   
   slide.addText(leftText, {
@@ -8651,6 +8651,8 @@ function createTwoColumnSlide(slide, data) {
     y: ZONES.content.y,
     w: columnWidth,
     h: ZONES.content.h,
+    fontSize: 16,
+    color: '333333',
     valign: 'top'
   });
   
@@ -8659,6 +8661,8 @@ function createTwoColumnSlide(slide, data) {
     y: ZONES.content.y,
     w: columnWidth,
     h: ZONES.content.h,
+    fontSize: 16,
+    color: '333333',
     valign: 'top'
   });
 }
