@@ -105,7 +105,7 @@ export function parseJSONTolerant(jsonString) {
     userMessage += '• Vérifiez les guillemets et virgules\n';
     userMessage += '• Pas de virgule après le dernier élément\n';
     userMessage += '• Utilisez jsonlint.com pour valider\n';
-    userMessage += '• Régénérez le JSON avec l\'IA\n';
+    userMessage += "• Régénérez le JSON avec l'IA\n";
     
     throw new Error(userMessage);
   }

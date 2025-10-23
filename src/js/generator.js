@@ -151,7 +151,7 @@ export async function generatePowerPoint() {
     
     // Check if any slides were successfully generated
     if (slidesGenerated === 0) {
-      throw new Error('❌ Aucune slide n\\'a pu être générée. Vérifiez votre JSON.');
+      throw new Error("❌ Aucune slide n'a pu être générée. Vérifiez votre JSON.");
     }
     
     // Finalize file
