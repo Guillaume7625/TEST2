@@ -7619,6 +7619,22 @@ function deepClone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
+/**
+ * QUICK WIN #2: Truncate text to a maximum number of words
+ * Adds "..." if truncated for professional look
+ */
+function truncateToWords(text, maxWords = 15) {
+  if (!text) return '';
+  
+  const words = String(text).trim().split(/\s+/);
+  
+  if (words.length <= maxWords) {
+    return text;
+  }
+  
+  return words.slice(0, maxWords).join(' ') + '...';
+}
+
 
   // ==========================================
   // Module: tableNormalizer.js
@@ -8568,19 +8584,36 @@ function createTitleSlide(slide, data) {
 
 /**
  * Create content slide with bullets
+ * QUICK WIN #3: Limit to 5 bullets max
+ * QUICK WIN #4: Colored header for professional look
  */
 function createContentSlide(slide, data) {
+  // QUICK WIN #4: Header coloré avec fond bleu
   slide.addText(data.title, {
     ...ZONES.title,
     fontSize: 32,
     bold: true,
-    color: '0066cc'
+    color: 'FFFFFF',      // Texte blanc
+    fill: '0066CC',       // Fond bleu
+    align: 'left'
   });
   
-  const bulletText = data.bullets.map(b => ({
-    text: String(b),
-    options: { bullet: true, fontSize: 18, color: '333333' }
-  }));
+  // QUICK WIN #3: Limiter à 5 bullets maximum
+  const bullets = data.bullets.slice(0, 5);
+  
+  // Avertissement console si tronqué
+  if (data.bullets.length > 5) {
+    console.warn(`⚠️ Slide "${data.title}": ${data.bullets.length} bullets détectés, limité à 5 pour lisibilité`);
+  }
+  
+  // QUICK WIN #2: Tronquer chaque bullet à 15 mots max
+  const bulletText = bullets.map(b => {
+    const truncated = truncateToWords(String(b), 15);
+    return {
+      text: truncated,
+      options: { bullet: true, fontSize: 18, color: '333333' }
+    };
+  });
   
   slide.addText(bulletText, {
     ...ZONES.content,
@@ -8669,7 +8702,27 @@ function createTableSlide(slide, data) {
     return;
   }
   
-  const tableData = normalizeTableData(sourceTable);
+  const normalizedData = normalizeTableData(sourceTable);
+  
+  // QUICK WIN #1: Alternance de lignes pour look professionnel
+  const tableData = normalizedData.map((row, rowIndex) => {
+    return row.map(cell => {
+      const isHeader = rowIndex === 0;
+      const isEvenRow = rowIndex % 2 === 0;
+      
+      return {
+        text: cell,
+        options: {
+          fill: isHeader ? '0066CC' : (isEvenRow ? 'F5F5F5' : 'FFFFFF'),
+          color: isHeader ? 'FFFFFF' : '333333',
+          bold: isHeader,
+          fontSize: isHeader ? 14 : 13,
+          align: 'center',
+          valign: 'middle'
+        }
+      };
+    });
+  });
   
   const rowHeight = 0.35;
   const h = Math.min(ZONES.content.h, tableData.length * rowHeight);
@@ -8679,11 +8732,7 @@ function createTableSlide(slide, data) {
     y: ZONES.content.y,
     w: ZONES.content.w + LAYOUT.bulletIndent,
     h,
-    border: { pt: 1, color: 'CFCFCF' },
-    fontSize: 14,
-    color: '333333',
-    valign: 'middle',
-    align: 'left'
+    border: { pt: 1, color: 'CFCFCF' }
   });
 }
 

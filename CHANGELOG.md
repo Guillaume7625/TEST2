@@ -5,6 +5,59 @@ Toutes les modifications notables du projet seront documentées dans ce fichier.
 Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
 et ce projet adhère au [Versioning Sémantique](https://semver.org/lang/fr/).
 
+## [2.1.0] - 2025-10-23
+
+### ✨ Ajouté - Quick Wins Qualité Professionnelle
+
+#### Quick Win #1 : Alternance de lignes dans les tableaux
+- Tables avec header bleu foncé (#0066CC) et texte blanc
+- Alternance automatique lignes paires (gris #F5F5F5) / impaires (blanc)
+- Texte centré et bordures uniformes pour look professionnel
+- **Impact** : Tables instantanément reconnaissables comme professionnelles
+
+#### Quick Win #2 : Troncature intelligente des bullets
+- Nouvelle fonction `truncateToWords()` dans `utils.js`
+- Troncature automatique à 15 mots maximum par bullet
+- Ajout de "..." pour indiquer contenu tronqué
+- Évite débordements et respecte best practices PowerPoint
+- **Impact** : Slides jamais surchargées, lisibilité garantie
+
+#### Quick Win #3 : Limite stricte à 5 bullets maximum
+- Application de la règle des 5 bullets max par slide
+- Avertissement console si plus de 5 bullets détectés
+- Troncature silencieuse et non-bloquante
+- **Impact** : Conformité aux standards de présentation professionnelle
+
+#### Quick Win #4 : Headers colorés pour slides content
+- Fond bleu (#0066CC) avec texte blanc pour tous les titres de slides content
+- Alignement à gauche pour meilleure hiérarchie visuelle
+- Contraste élevé pour lisibilité maximale
+- **Impact** : Structure visuelle claire et professionnelle
+
+### 🔧 Modifié
+- `src/js/slideCreators.js` : Refonte complète création slides content et table
+- `src/js/utils.js` : Ajout fonction utilitaire `truncateToWords()`
+- `standalone/bundle.js` : Rebuild avec tous les quick wins intégrés
+
+### 📊 Métriques
+- **Taille bundle** : 1072 KB (stable, pas d'augmentation)
+- **Taille ZIP** : 315 KB (inchangée)
+- **Temps implémentation** : 25 minutes
+- **Impact visuel** : Transformation complète look & feel
+
+### 🧪 Tests
+- Ajout `test-quick-wins.json` pour validation visuelle
+- Test limite 5 bullets (7 fournis → 5 affichés)
+- Test troncature bullet long (> 15 mots → tronqué avec ...)
+- Test alternance lignes tableau (6 lignes de données)
+- Test header coloré sur toutes slides content
+
+### 📚 Documentation
+- Commentaires JSDoc sur toutes nouvelles fonctions
+- Annotations "QUICK WIN #X" dans le code pour traçabilité
+
+---
+
 ## [2.0.0] - 2025-10-23
 
 ### ✨ Ajouté

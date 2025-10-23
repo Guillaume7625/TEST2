@@ -66,3 +66,19 @@ export function escapeHtml(text) {
 export function deepClone(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
+
+/**
+ * QUICK WIN #2: Truncate text to a maximum number of words
+ * Adds "..." if truncated for professional look
+ */
+export function truncateToWords(text, maxWords = 15) {
+  if (!text) return '';
+  
+  const words = String(text).trim().split(/\s+/);
+  
+  if (words.length <= maxWords) {
+    return text;
+  }
+  
+  return words.slice(0, maxWords).join(' ') + '...';
+}
