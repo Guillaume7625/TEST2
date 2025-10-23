@@ -1,0 +1,314 @@
+/**
+ * PowerPoint Generator Styles
+ */
+
+/* === Reset & Base === */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+/* === Container === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* === Header === */
+header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 40px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+header p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* === Content === */
+.content {
+  padding: 40px;
+}
+
+/* === Instructions === */
+.instructions {
+  background: #f0f4ff;
+  border-left: 4px solid #667eea;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+}
+
+.instructions h2 {
+  color: #667eea;
+  font-size: 20px;
+  margin: 0 0 15px;
+}
+
+.instructions ol {
+  margin: 0 0 0 20px;
+  line-height: 1.8;
+  color: #4a5568;
+}
+
+/* === Sections === */
+.section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* === Buttons === */
+.btn {
+  background: #667eea;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn:hover {
+  background: #5a67d8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-primary {
+  background: #48bb78;
+  font-size: 18px;
+  padding: 16px 32px;
+}
+
+.btn-primary:hover {
+  background: #38a169;
+  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.35);
+}
+
+.copy-btn {
+  background: #ed8936;
+}
+
+.copy-btn:hover {
+  background: #dd6b20;
+}
+
+/* === Textarea === */
+textarea {
+  width: 100%;
+  min-height: 450px;
+  padding: 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+/* === Alerts === */
+.alert {
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  display: none;
+  animation: slideIn 0.2s ease;
+  white-space: pre-wrap;
+}
+
+.alert-error {
+  background: #fff5f5;
+  border-left: 4px solid #fc8181;
+  color: #c53030;
+}
+
+.alert-success {
+  background: #f0fff4;
+  border-left: 4px solid #68d391;
+  color: #2f855a;
+}
+
+.alert-warning {
+  background: #fffaf0;
+  border-left: 4px solid #f6ad55;
+  color: #c05621;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Collapsible === */
+.collapsible {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.collapsible + .collapsible {
+  margin-top: 16px;
+}
+
+.collapsible-header {
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #2d3748;
+  transition: background 0.15s ease;
+}
+
+.collapsible-header:hover {
+  background: #edf2f7;
+}
+
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.collapsible-content.active {
+  max-height: 2000px;
+}
+
+.collapsible-body {
+  padding: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* === Pre/Code === */
+pre {
+  background: #2d3748;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+code {
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+}
+
+/* === Prompt Box === */
+.prompt-box {
+  background: #fffaf0;
+  border: 2px solid #ed8936;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.prompt-box textarea {
+  background: #fff;
+  min-height: 300px;
+  font-size: 13px;
+}
+
+#copyFeedback {
+  color: #38a169;
+  margin-top: 10px;
+  display: none;
+}
+
+/* === Spinner === */
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  header h1 {
+    font-size: 24px;
+  }
+
+  .btn-primary {
+    font-size: 16px;
+    padding: 14px 24px;
+  }
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test JSZip.default</title>
+</head>
+<body>
+  <h1>Testing JSZip.default Assignment</h1>
+  <div id="results"></div>
+  
+  <script src="standalone/bundle.js"></script>
+  <script>
+    const results = document.getElementById('results');
+    
+    function log(msg, type = 'info') {
+      const div = document.createElement('div');
+      div.style.margin = '5px';
+      div.style.padding = '5px';
+      div.style.border = '1px solid #ccc';
+      div.style.backgroundColor = type === 'error' ? '#fee' : type === 'success' ? '#efe' : '#eef';
+      div.textContent = msg;
+      results.appendChild(div);
+      console.log(`[${type.toUpperCase()}]`, msg);
+    }
+    
+    try {
+      log('Testing JSZip global availability...', 'info');
+      
+      if (typeof window.JSZip === 'undefined') {
+        log('ERROR: window.JSZip is undefined!', 'error');
+      } else {
+        log('✓ window.JSZip is defined', 'success');
+        log(`  Type: ${typeof window.JSZip}`, 'info');
+        
+        if (typeof window.JSZip.default !== 'undefined') {
+          log('✓ window.JSZip.default is defined', 'success');
+          log(`  window.JSZip.default === window.JSZip: ${window.JSZip.default === window.JSZip}`, 'info');
+        } else {
+          log('ERROR: window.JSZip.default is undefined!', 'error');
+        }
+      }
+      
+      log('\nTesting PptxGenJS instantiation...', 'info');
+      
+      if (typeof window.PptxGenJS === 'undefined') {
+        log('ERROR: window.PptxGenJS is undefined!', 'error');
+      } else {
+        log('✓ window.PptxGenJS is defined', 'success');
+        log(`  Type: ${typeof window.PptxGenJS}`, 'info');
+        
+        try {
+          const pptx = new window.PptxGenJS();
+          log('✓ PptxGenJS instantiated successfully!', 'success');
+          log(`  Instance type: ${typeof pptx}`, 'info');
+          log(`  Has addSlide method: ${typeof pptx.addSlide === 'function'}`, 'info');
+        } catch (err) {
+          log(`ERROR instantiating PptxGenJS: ${err.message}`, 'error');
+          log(`  Stack: ${err.stack}`, 'error');
+        }
+      }
+      
+    } catch (err) {
+      log(`FATAL ERROR: ${err.message}`, 'error');
+      log(`  Stack: ${err.stack}`, 'error');
+    }
+  </script>
+</body>
+</html>

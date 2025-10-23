@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    title: "Test Présentation",
+    "author": "Test Author",
+    "fileName": "Test Présentation.pptx",
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": ""Titre Principal"",
+      "subtitle": "Sous-titre avec apostrophe: l'été"
+    }
+    {
+      "type": "content",
+      "title": "Points Clés",
+      "bullets": [
+        "Premier point""avec guillemets doubles",
+        "Deuxième point",
+        "Troisième point",
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Tableau Test",
+      "tableData": [
+        ["Colonne 1", ""Colonne 2"", "Colonne 3"],
+        ["Donnée 1", "Donnée 2", "Donnée 3",]
+      ]
+    }
+  ]
+}

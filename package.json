@@ -1,0 +1,32 @@
+{
+  "name": "powerpoint-generator-offline",
+  "version": "2.0.0",
+  "description": "Professional offline PowerPoint generator with JSON input",
+  "main": "index.html",
+  "scripts": {
+    "build": "node build.js",
+    "build:standalone": "node build-standalone.js",
+    "test": "node test/run-tests.js",
+    "clean": "rm -rf build/* standalone/*",
+    "dev": "python3 -m http.server 8080"
+  },
+  "keywords": [
+    "powerpoint",
+    "pptx",
+    "generator",
+    "offline",
+    "presentation",
+    "slides"
+  ],
+  "author": "Assistant IA Genspark",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/powerpoint-generator.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
