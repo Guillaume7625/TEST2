@@ -1,0 +1,1573 @@
+<!-- 
+  ============================================
+  Générateur PowerPoint Professionnel v2.0
+  Version améliorée avec correctifs intégrés
+  Date: 2025-10-24
+  
+  Améliorations v2.0:
+  - Loader PptxGenJS robuste avec fallback
+  - Validation tables 7 niveaux
+  - Normalisation sécurisée des données
+  - Génération progressive avec feedback
+  - Gestion avancée des erreurs
+  - Support des cas limites
+  ============================================
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Générateur PowerPoint Professionnel v2.0 (Amélioré)</title>
+  <script id="pptxgen-bundle-data" type="application/octet-stream"><!--PPTX_BUNDLE_BASE64--></script>
+  <script type="text/plain" id="optimalPromptV2">
+Tu es un générateur de contenu pour présentations PowerPoint professionnelles. Tu dois produire UNIQUEMENT un objet JSON valide, sans texte avant/après, sans balises markdown, sans commentaires.
+
+
+
+════════════════════════════════════════════════════════════════════════════════
+VERSION 2.0 - AMÉLIORATIONS
+════════════════════════════════════════════════════════════════════════════════
+
+Cette version intègre les correctifs suivants :
+• Validation renforcée des tables (7 niveaux de vérification)
+• Normalisation sécurisée avec gestion d'erreurs
+• Feedback progressif pendant la génération
+• Meilleure gestion des cas limites et erreurs
+• Support amélioré des caractères spéciaux
+
+CONTEXTE DE GÉNÉRATION (à remplir) :
+SUJET : [votre sujet]
+AUDIENCE : [votre audience cible]
+NOMBRE_SLIDES : [nombre exact de slides souhaité]
+DURÉE_MINUTES : [durée prévue de présentation]
+STYLE : [professionnel/créatif/académique/commercial]
+
+════════════════════════════════════════════════════════════════════════════════
+CONTRAINTES TECHNIQUES ABSOLUES
+════════════════════════════════════════════════════════════════════════════════
+
+📌 ENCODAGE & SYNTAXE JSON
+• UTF-8 obligatoire, accents français autorisés (é, è, à, ç, œ)
+• Guillemets doubles UNIQUEMENT pour les clés et valeurs
+• Pour insérer un guillemet double dans une chaîne : "
+• INTERDICTION STRICTE : virgules finales dans objets/tableaux
+• INTERDICTION STRICTE : commentaires // ou /* */
+• Respect absolu du schéma JSON fourni ci-dessous
+
+📌 CAS SPÉCIAUX À GÉRER IMPÉRATIVEMENT
+
+1️⃣ GUILLEMETS DANS LE TEXTE
+   ✅ CORRECT : 
+      "bullets": ["Le concept \"innovation\" transforme les entreprises"]
+   
+   ❌ INCORRECT : 
+      "bullets": ["Le concept "innovation" transforme les entreprises"]
+      "bullets": ["Le concept «innovation» transforme les entreprises"]
+   
+   RÈGLE : Toujours échapper les guillemets doubles internes avec \"
+           Ne JAMAIS utiliser les guillemets typographiques « » " "
+
+2️⃣ NOMBRES DANS LES TABLEAUX
+   ✅ CORRECT (chaînes de caractères) :
+      "tableData": [
+        ["Métrique", "Valeur", "Évolution"],
+        ["Croissance", "45%", "+12%"],
+        ["Budget", "2.5M€", "Stable"]
+      ]
+   
+   ❌ INCORRECT (nombres bruts) :
+      "tableData": [
+        ["Métrique", "Valeur", "Évolution"],
+        ["Croissance", 45, 12],
+        ["Budget", 2500000, 0]
+      ]
+   
+   RÈGLE : TOUJOURS convertir nombres en chaînes avec unités/formatage
+           Exemple : 45 → "45%", 2500000 → "2.5M€", 3.7 → "3.7/5"
+
+3️⃣ CARACTÈRES SPÉCIAUX AUTORISÉS
+   ✅ AUTORISÉS :
+      • Accents : à é è ê ç ù î ô û ë ï
+      • Ligatures : œ æ
+      • Apostrophes simples : '
+      • Tirets : - (trait d'union), — (tiret cadratin pour emphase)
+      • Symboles courants : € $ % & @ # *
+   
+   ❌ INTERDITS :
+      • Guillemets typographiques : « » " " ' '
+      • Caractères de contrôle : \n \t \r (sauf échappement volontaire)
+      • Emojis dans les données structurées (OK dans title/subtitle)
+   
+   RÈGLE : Utiliser uniquement les caractères du standard UTF-8
+           Remplacer « texte » par "texte" ou \"texte\" selon contexte
+
+4️⃣ VALIDATION AVANT GÉNÉRATION
+   Avant de retourner le JSON, VÉRIFIER MENTALEMENT :
+   
+   ☑ JSON.parse(output) fonctionnerait sans erreur
+   ☑ Aucun guillemet typographique présent
+   ☑ Tous les nombres dans tableData sont entre "guillemets"
+   ☑ Aucune virgule finale : {"key": "value",} ❌
+   ☑ Tous les tableData commencent par une ligne d'en-têtes non vide
+
+════════════════════════════════════════════════════════════════════════════════
+RÈGLES DE CONTENU OBLIGATOIRES
+════════════════════════════════════════════════════════════════════════════════
+
+🎯 STRUCTURE NARRATIVE
+• Architecture : slide titre → développement progressif → conclusion avec action
+• Progression pédagogique : général → spécifique, problème → solution
+• Alternance types de slides toutes les 2-3 slides (maintien attention)
+• Chaque slide apporte information nouvelle (pas de répétition)
+
+📐 CONTRAINTES DIMENSIONNELLES
+• Titres slides : MAX 60 caractères, formulés comme affirmations/questions
+• Bullets content : 3-5 par slide, MAX 15 mots chacun
+• TwoColumn : 2-4 points par colonne, MAX 15 mots par point
+• Tables : MAX 4 colonnes, MAX 10 lignes (en-têtes inclus)
+
+✍️ STYLE RÉDACTIONNEL
+• Bullets : commencer par verbe d'action (Analyser, Optimiser, Développer...)
+• Titres : impactants et synthétiques (éviter "Introduction", préférer "3 Défis Majeurs")
+• Dernière slide : OBLIGATOIREMENT type "content" avec synthèse + call-to-action concret
+
+════════════════════════════════════════════════════════════════════════════════
+SCHÉMA JSON OBLIGATOIRE
+════════════════════════════════════════════════════════════════════════════════
+
+{
+  "metadata": {
+    "title": "Titre principal de la présentation (max 60 caractères)",
+    "author": "Nom de l'auteur ou du présentateur",
+    "company": "Nom de l'organisation ou entreprise",
+    "subject": "Description courte du sujet (optionnel)",
+    "fileName": "nom-fichier-sans-espaces-ni-accents.pptx"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": "Titre principal accrocheur et impactant",
+      "subtitle": "Sous-titre contextuel apportant précision (optionnel)",
+      "backgroundColor": "0066CC",
+      "titleColor": "FFFFFF"
+    },
+    {
+      "type": "content",
+      "title": "Titre clair de la section",
+      "bullets": [
+        "Premier point avec verbe d'action et bénéfice clair",
+        "Deuxième point apportant une information complémentaire",
+        "Troisième point renforçant le message principal"
+      ]
+    },
+    {
+      "type": "twoColumn",
+      "title": "Comparaison ou analyse duale",
+      "leftContent": [
+        "Point colonne gauche 1 (max 15 mots)",
+        "Point colonne gauche 2",
+        "Point colonne gauche 3"
+      ],
+      "rightContent": [
+        "Point colonne droite 1 (max 15 mots)",
+        "Point colonne droite 2",
+        "Point colonne droite 3"
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Données comparatives structurées",
+      "tableData": [
+        ["Critère", "Option A", "Option B"],
+        ["Performance", "Élevée", "Moyenne"],
+        ["Coût", "2.5M€", "1.8M€"],
+        ["Délai", "6 mois", "9 mois"]
+      ]
+    },
+    {
+      "type": "image",
+      "title": "Titre décrivant le visuel attendu",
+      "imagePath": "IMAGE_PLACEHOLDER_graphique-evolution-marche-2020-2025"
+    },
+    {
+      "type": "content",
+      "title": "Conclusion et Prochaines Étapes",
+      "bullets": [
+        "Synthèse du point clé numéro 1",
+        "Synthèse du point clé numéro 2",
+        "Action concrète à entreprendre immédiatement"
+      ]
+    }
+  ]
+}
+
+════════════════════════════════════════════════════════════════════════════════
+TYPES DE SLIDES : SPÉCIFICATIONS DÉTAILLÉES
+════════════════════════════════════════════════════════════════════════════════
+
+TYPE "title" — Page de garde (première slide UNIQUEMENT)
+─────────────────────────────────────────────────────────
+Propriétés obligatoires :
+  • type: "title"
+  • title: string (max 60 caractères)
+
+Propriétés optionnelles :
+  • subtitle: string
+  • backgroundColor: string hex 6 caractères SANS # (ex: "0066CC")
+  • titleColor: string hex 6 caractères SANS # (ex: "FFFFFF")
+  • subtitleColor: string hex 6 caractères SANS #
+
+Règles :
+  ✓ Doit TOUJOURS être la première slide (slides[0])
+  ✓ Une seule slide title par présentation
+  ✓ Couleurs HEX sans dièse : "0066CC" ✅  "#0066CC" ❌
+
+TYPE "content" — Liste à puces
+─────────────────────────────────────────────────────────
+Propriétés obligatoires :
+  • type: "content"
+  • title: string (max 60 caractères)
+  • bullets: string[] (3 à 5 éléments)
+
+Règles :
+  ✓ Chaque bullet : MAX 15 mots
+  ✓ Commencer par verbe d'action si possible
+  ✓ DOIT être le type de la dernière slide (conclusion)
+
+Exemple :
+{
+  "type": "content",
+  "title": "Axes Stratégiques 2025",
+  "bullets": [
+    "Développer une offre digitale différenciante et personnalisée",
+    "Optimiser les processus internes pour réduire délais de 30%",
+    "Former les équipes aux nouvelles technologies cloud"
+  ]
+}
+
+TYPE "twoColumn" — Comparaison deux colonnes
+─────────────────────────────────────────────────────────
+Propriétés obligatoires :
+  • type: "twoColumn"
+  • title: string (max 60 caractères)
+  • leftContent: string[] (2 à 4 éléments)
+  • rightContent: string[] (2 à 4 éléments)
+
+Règles :
+  ✓ Chaque point : MAX 15 mots
+  ✓ Pas de propriétés leftTitle/rightTitle (non supportées)
+  ✓ Utile pour : avant/après, avantages/inconvénients, comparaisons
+
+Exemple :
+{
+  "type": "twoColumn",
+  "title": "Situation Actuelle vs Objectifs",
+  "leftContent": [
+    "Processus manuels chronophages",
+    "Données dispersées dans 5 systèmes",
+    "Taux erreur à 8%"
+  ],
+  "rightContent": [
+    "Automatisation complète des tâches répétitives",
+    "Plateforme unique centralisée et sécurisée",
+    "Objectif : réduire erreurs à moins de 2%"
+  ]
+}
+
+TYPE "table" — Tableau de données
+─────────────────────────────────────────────────────────
+Propriétés obligatoires :
+  • type: "table"
+  • title: string (max 60 caractères)
+  • tableData: Array<Array<string>>
+
+Structure tableData IMPÉRATIVE :
+  [
+    ["En-tête 1", "En-tête 2", "En-tête 3"],  ← Ligne 1 = EN-TÊTES (obligatoire)
+    ["Valeur 1.1", "Valeur 1.2", "Valeur 1.3"],
+    ["Valeur 2.1", "Valeur 2.2", "Valeur 2.3"]
+  ]
+
+Règles STRICTES :
+  ✓ MAX 4 colonnes
+  ✓ MAX 10 lignes (en-têtes inclus)
+  ✓ Première ligne = en-têtes (sera automatiquement en gras + fond gris)
+  ✓ TOUS les éléments DOIVENT être des chaînes : "45%" ✅  45 ❌
+  ✓ Chaque ligne doit avoir le même nombre de colonnes
+
+Exemple CORRECT :
+{
+  "type": "table",
+  "title": "Comparaison Solutions Cloud",
+  "tableData": [
+    ["Fournisseur", "Coût Mensuel", "SLA", "Support"],
+    ["AWS", "2500€", "99.99%", "24/7"],
+    ["Azure", "2300€", "99.95%", "24/7"],
+    ["GCP", "2100€", "99.9%", "Heures bureau"]
+  ]
+}
+
+Exemple INCORRECT (nombres non quotés) :
+{
+  "tableData": [
+    ["Métrique", "2023", "2024"],
+    ["Revenue", 2500000, 3200000],  ❌ Nombres bruts
+    ["Croissance", 0.28, 0.35]       ❌ Floats bruts
+  ]
+}
+
+Correction :
+{
+  "tableData": [
+    ["Métrique", "2023", "2024"],
+    ["Revenue", "2.5M€", "3.2M€"],   ✅ Strings formatées
+    ["Croissance", "+28%", "+35%"]   ✅ Strings avec contexte
+  ]
+}
+
+TYPE "image" — Visuel ou placeholder
+─────────────────────────────────────────────────────────
+Propriétés obligatoires :
+  • type: "image"
+  • title: string (max 60 caractères)
+  • imagePath: string
+
+Formats imagePath acceptés :
+  1️⃣ Data URI base64 (fonctionnement hors-ligne) :
+     "data:image/png;base64,iVBORw0KGgoAAAANS..."
+  
+  2️⃣ Placeholder descriptif (cadre sera inséré) :
+     "IMAGE_PLACEHOLDER_description-detaillee-du-visuel"
+
+Formats INTERDITS :
+  ❌ URLs HTTP/HTTPS : "https://exemple.com/image.jpg"
+  ❌ Chemins relatifs : "./images/chart.png"
+  ❌ Chemins absolus locaux : "/Users/john/Desktop/image.png"
+
+Règles :
+  ✓ Privilégier placeholders pour génération initiale
+  ✓ Description placeholder : tirets, pas d'espaces
+  ✓ Data URI : uniquement si image déjà disponible en base64
+
+Exemple placeholder :
+{
+  "type": "image",
+  "title": "Évolution du Chiffre d'Affaires",
+  "imagePath": "IMAGE_PLACEHOLDER_graphique-courbe-CA-2020-2025-avec-projections"
+}
+
+════════════════════════════════════════════════════════════════════════════════
+CHECKLIST VALIDATION FINALE (à vérifier mentalement avant retour)
+════════════════════════════════════════════════════════════════════════════════
+
+□ 1. Nombre de slides = NOMBRE_SLIDES spécifié
+□ 2. Première slide = type "title"
+□ 3. Dernière slide = type "content" avec call-to-action
+□ 4. metadata.title présent et < 60 caractères
+□ 5. metadata.fileName : minuscules, tirets, .pptx
+□ 6. Aucun titre de slide > 60 caractères
+□ 7. Bullets content : 3-5 par slide, ≤ 15 mots chacun
+□ 8. TwoColumn : 2-4 points par colonne, ≤ 15 mots
+□ 9. Tables : première ligne = en-têtes, ≤ 4 colonnes, ≤ 10 lignes
+□ 10. Tables : TOUS les éléments sont des strings
+□ 11. imagePath : data URI ou IMAGE_PLACEHOLDER_...
+□ 12. Aucun guillemet typographique « » " "
+□ 13. Aucune virgule finale dans objets/tableaux
+□ 14. Alternance raisonnable des types de slides
+□ 15. Progression logique du contenu
+
+════════════════════════════════════════════════════════════════════════════════
+EXEMPLE COMPLET DE RÉFÉRENCE
+════════════════════════════════════════════════════════════════════════════════
+
+{
+  "metadata": {
+    "title": "Stratégie Marketing Digital 2025",
+    "author": "Marie Dupont",
+    "company": "TechCorp Solutions",
+    "subject": "Transformation digitale et croissance",
+    "fileName": "strategie-marketing-digital-2025.pptx"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": "Stratégie Marketing Digital 2025",
+      "subtitle": "Accélérer notre transformation pour doubler l'impact",
+      "backgroundColor": "0066CC",
+      "titleColor": "FFFFFF",
+      "subtitleColor": "E0E0E0"
+    },
+    {
+      "type": "content",
+      "title": "Contexte : Un Marché en Mutation Rapide",
+      "bullets": [
+        "Croissance digitale de 45% depuis 2023 dans notre secteur",
+        "Concurrence accrue nécessitant différenciation forte et rapide",
+        "Attentes clients évoluent vers expérience hyper-personnalisée",
+        "Budget marketing doit générer ROI mesurable sous 6 mois"
+      ]
+    },
+    {
+      "type": "twoColumn",
+      "title": "Situation Actuelle vs Vision 2025",
+      "leftContent": [
+        "Présence limitée aux réseaux sociaux classiques",
+        "Taux de conversion moyen de 2.3%",
+        "Budget dispersé sur 12 canaux différents"
+      ],
+      "rightContent": [
+        "Écosystème digital omnicanal cohérent et optimisé",
+        "Objectif conversion à 5% d'ici T2 2025",
+        "Budget concentré sur 5 canaux à fort ROI"
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Comparaison Performance Canaux Digitaux",
+      "tableData": [
+        ["Canal", "Coût Acquisition", "ROI Estimé", "Priorité"],
+        ["SEO", "45€", "320%", "Haute"],
+        ["Google Ads", "78€", "180%", "Haute"],
+        ["LinkedIn", "125€", "150%", "Moyenne"],
+        ["Facebook", "52€", "95%", "Faible"]
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Actions Prioritaires Q1 2025",
+      "bullets": [
+        "Refonte complète du site web avec UX optimisée",
+        "Lancement campagne SEO sur 50 mots-clés stratégiques",
+        "Automatisation email marketing avec segmentation",
+        "Création contenu vidéo pour réseaux sociaux"
+      ]
+    },
+    {
+      "type": "image",
+      "title": "Projection Croissance CA Digital 2025-2027",
+      "imagePath": "IMAGE_PLACEHOLDER_graphique-courbe-projection-ca-digital-avec-zones-croissance"
+    },
+    {
+      "type": "content",
+      "title": "Plan d'Action : 3 Piliers Stratégiques",
+      "bullets": [
+        "Pilier 1 : Optimiser SEO et contenu pour doubler trafic organique",
+        "Pilier 2 : Lancer campagnes Google Ads ciblées avec A/B testing",
+        "Pilier 3 : Déployer plateforme CRM pour personnalisation client",
+        "Objectif global : atteindre 5M€ CA digital fin 2025"
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Prochaines Étapes et Engagement",
+      "bullets": [
+        "Validation budget de 450K€ avant fin du mois",
+        "Recrutement d'un Growth Hacker senior sous 6 semaines",
+        "Lancement campagne pilote SEO dès le 15 janvier",
+        "Rendez-vous mensuel pour suivi KPIs et ajustements"
+      ]
+    }
+  ]
+}
+
+════════════════════════════════════════════════════════════════════════════════
+RAPPEL FINAL : ERREURS FRÉQUENTES À ÉVITER ABSOLUMENT
+════════════════════════════════════════════════════════════════════════════════
+
+❌ Virgule finale : {"slides": [...],}
+❌ Guillemets typographiques : "Le concept «innovation» est clé"
+❌ Nombres bruts dans tables : ["CA", 2500000] au lieu de ["CA", "2.5M€"]
+❌ Couleurs avec # : {"backgroundColor": "#0066CC"} au lieu de "0066CC"
+❌ Images HTTP : "imagePath": "https://..." (non compatible hors-ligne)
+❌ Oubli échappement : "Le mot "test"" au lieu de "Le mot \"test\""
+❌ Tableaux sans en-têtes : [["Val1", "Val2"]] au lieu de [["Col1", "Col2"], ["Val1", "Val2"]]
+❌ Bullets trop longs : > 15 mots (dilue le message)
+❌ Première slide pas "title" : Slide 1 doit toujours être type "title"
+❌ Dernière slide pas "content" : Dernière doit contenir conclusion/action
+
+════════════════════════════════════════════════════════════════════════════════
+
+GÉNÉRATION : Produis maintenant le JSON en respectant TOUTES les règles ci-dessus.
+  </script>
+  <script>
+    (function loadPptxGenRobust() {
+      const container = document.getElementById('pptxgen-bundle-data');
+
+      // === NIVEAU 1 : Tentative chargement depuis base64 embarqué ===
+      if (container) {
+        const base64 = container.textContent.replace(/\s+/g, '');
+
+        if (base64 && base64 !== '<!--PPTX_BUNDLE_BASE64-->' && base64.length > 10000) {
+          try {
+            const scriptEl = document.createElement('script');
+            scriptEl.type = 'text/javascript';
+            scriptEl.textContent = atob(base64);
+            document.head.appendChild(scriptEl);
+            console.info('✓ PptxGenJS chargé depuis base64 embarqué');
+            return;
+          } catch (err) {
+            console.warn('⚠️ Échec décodage base64, tentative fallback...', err);
+          }
+        } else {
+          console.warn('⚠️ Base64 manquant/invalide, tentative fallback...');
+        }
+      }
+
+      // === NIVEAU 2 : Fallback vers fichier externe pptxgen.bundle.js ===
+      const fallbackScript = document.createElement('script');
+      fallbackScript.src = './pptxgen.bundle.js';
+      fallbackScript.onerror = () => {
+        console.error('❌ Échec chargement pptxgen.bundle.js externe');
+        showCriticalError();
+      };
+      fallbackScript.onload = () => {
+        console.info('✓ PptxGenJS chargé depuis fichier externe (fallback)');
+      };
+      document.head.appendChild(fallbackScript);
+
+      function showCriticalError() {
+        document.body.innerHTML = `
+          <div style="
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #fc8181 0%, #c53030 100%);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-family: system-ui, -apple-system, sans-serif; padding: 40px; z-index: 9999;
+          ">
+            <div style="max-width: 600px; text-align: center;">
+              <div style="font-size: 72px; margin-bottom: 20px;">⚠️</div>
+              <h1 style="font-size: 28px; margin: 0 0 16px; font-weight: 700;">
+                Erreur Critique : Bibliothèque Manquante
+              </h1>
+              <p style="font-size: 18px; line-height: 1.6; margin: 0 0 24px; opacity: 0.95;">
+                La bibliothèque <code style="background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 4px;">pptxgen.bundle.js</code>
+                n'a pas pu être chargée.
+              </p>
+              <div style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; text-align: left; font-size: 14px;">
+                <strong>Solutions :</strong><br>
+                1. Vérifiez que <code>pptxgen.bundle.js</code> est dans le même dossier<br>
+                2. Si vous utilisez la version embarquée, vérifiez le placeholder base64<br>
+                3. Ouvrez la console (F12) pour voir les détails de l'erreur
+              </div>
+            </div>
+          </div>
+        ";
+      }
+    })();
+
+    function checkPptxGenAvailable() {
+      if (typeof window.PptxGenJS === 'undefined' && typeof window.pptxgen === 'undefined') {
+        throw new Error(
+          "PptxGenJS n'est pas disponible.\n" +
+          'Vérifiez que pptxgen.bundle.js est correctement chargé.\n' +
+          'Rechargez la page ou consultez la console pour plus de détails.'
+        );
+      }
+      return window.PptxGenJS || window.pptxgen;
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh; margin: 0; padding: 20px;
+    }
+    .container {
+      max-width: 1200px; margin: 0 auto; background: #fff; border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden;
+    }
+    header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 40px; text-align: center; }
+    header h1 { font-size: 32px; font-weight: 700; margin: 0 0 10px; }
+    header p { font-size: 16px; opacity: .9; margin: 0; }
+    .content { padding: 40px; }
+
+    .instructions { background: #f0f4ff; border-left: 4px solid #667eea; padding: 20px; margin-bottom: 30px; border-radius: 8px; }
+    .instructions h2 { color: #667eea; font-size: 20px; margin: 0 0 15px; }
+    .instructions ol { margin: 0 0 0 20px; line-height: 1.8; color: #4a5568; }
+
+    .section { margin-bottom: 30px; }
+    .section-title { font-size: 18px; font-weight: 600; color: #2d3748; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+
+    .btn { background: #667eea; color: #fff; border: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px; }
+    .btn:hover { background: #5a67d8; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,.35); }
+    .btn:active { transform: translateY(0); }
+    .btn[disabled] { opacity: .6; cursor: not-allowed; box-shadow: none; transform: none; }
+    .btn-primary { background: #48bb78; font-size: 18px; padding: 16px 32px; }
+    .btn-primary:hover { background: #38a169; box-shadow: 0 4px 12px rgba(72,187,120,.35); }
+    .copy-btn { background: #ed8936; }
+    .copy-btn:hover { background: #dd6b20; }
+
+    textarea { width: 100%; min-height: 450px; padding: 20px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: Consolas, Monaco, 'Courier New', monospace; font-size: 14px; line-height: 1.6; resize: vertical; transition: border-color .2s ease; }
+    textarea:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102,126,234,.15); }
+
+    .alert { padding: 16px 20px; border-radius: 8px; margin-top: 20px; display: none; animation: slideIn .2s ease; white-space: pre-wrap; }
+    .alert-error { background: #fff5f5; border-left: 4px solid #fc8181; color: #c53030; }
+    .alert-success { background: #f0fff4; border-left: 4px solid #68d391; color: #2f855a; }
+    .alert-warning { background: #fffaf0; border-left: 4px solid #f6ad55; color: #c05621; }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(-6px);} to { opacity:1; transform: translateY(0);} }
+
+    .collapsible { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+    .collapsible + .collapsible { margin-top: 16px; }
+    .collapsible-header { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: #2d3748; transition: background .15s ease; }
+    .collapsible-header:hover { background: #edf2f7; }
+    .collapsible-content { max-height: 0; overflow: hidden; transition: max-height .25s ease; }
+    .collapsible-content.active { max-height: 2000px; }
+    .collapsible-body { padding: 20px; border-top: 1px solid #e2e8f0; }
+    pre { background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 6px; overflow-x: auto; font-size: 13px; line-height: 1.6; }
+
+    .prompt-box { background: #fffaf0; border: 2px solid #ed8936; border-radius: 8px; padding: 20px; margin-top: 15px; }
+    .prompt-box textarea { background: #fff; min-height: 300px; font-size: 13px; }
+    #copyFeedback { color: #38a169; margin-top: 10px; display: none; }
+
+    .spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid rgba(0,0,0,.1); border-left-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: text-bottom; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎯 Générateur PowerPoint Professionnel</h1>
+      <p>Créez des présentations de qualité en quelques secondes — 100% hors‑ligne</p>
+    </header>
+
+    <div class="content">
+      <div class="instructions">
+        <h2>📋 Comment utiliser ce générateur</h2>
+        <ol>
+          <li><strong>Téléchargez</strong> <code>pptxgen.bundle.js</code> et placez-le à côté de ce fichier HTML.</li>
+          <li><strong>Affichez et copiez</strong> le prompt optimal (bouton ci-dessous), renseignez vos variables (SUJET, AUDIENCE, ...).</li>
+          <li><strong>Collez</strong> le JSON généré par l’IA dans la zone de texte.</li>
+          <li><strong>Cliquez</strong> sur « Générer PowerPoint » pour obtenir le <code>.pptx</code>.</li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <button class="btn" onclick="togglePrompt()">📝 Afficher le Prompt Optimal</button>
+        <div id="promptBox" class="prompt-box" style="display:none;">
+          <div class="section-title">Prompt à copier dans votre IA :</div>
+          <textarea id="promptText" readonly></textarea>
+          <button class="btn copy-btn" onclick="copyPrompt()">📋 Copier le Prompt</button>
+          <div id="copyFeedback" role="status" aria-live="polite" data-default-message="✓ Prompt copié dans le presse‑papier !">✓ Prompt copié dans le presse‑papier !</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">📄 Collez ici le JSON généré par l’IA :</div>
+        <textarea id="jsonInput" placeholder='Collez votre JSON ici...'></textarea>
+      </div>
+
+      <div class="section">
+        <button id="generateBtn" class="btn btn-primary" onclick="generatePowerPoint()">
+          <span id="genLabel">🚀 Générer PowerPoint</span>
+          <span id="genSpin" style="display:none;" class="spinner"></span>
+        </button>
+      </div>
+
+      <div id="error" class="alert alert-error" role="alert" aria-live="assertive"></div>
+      <div id="success" class="alert alert-success" role="status" aria-live="polite"></div>
+      <div id="warning" class="alert alert-warning" role="status" aria-live="polite"></div>
+
+      <div class="collapsible">
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+          <span>💡 Exemple JSON Minimal</span><span>▼</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="collapsible-body">
+<pre>{
+  "metadata": {
+    "title": "Ma Présentation",
+    "author": "Votre Nom",
+    "company": "Votre Organisation",
+    "fileName": "ma-presentation.pptx"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": "Titre Principal",
+      "subtitle": "Sous-titre descriptif",
+      "backgroundColor": "0066CC",
+      "titleColor": "FFFFFF"
+    },
+    {
+      "type": "content",
+      "title": "Points Clés",
+      "bullets": [
+        "Définir l’objectif de la présentation",
+        "Structurer le message en 3 points",
+        "Clore avec un appel à l’action"
+      ]
+    }
+  ]
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible">
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+          <span>🔧 Types de Slides Supportés</span><span>▼</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="collapsible-body">
+            <p><strong>1. title</strong> — Page de titre (obligatoirement la 1ʳᵉ slide)</p>
+            <p><strong>2. content</strong> — Points (3 à 5 bullets, ≤ 15 mots chacun)</p>
+            <p><strong>3. twoColumn</strong> — Deux colonnes (2 à 4 points par colonne)</p>
+            <p><strong>4. table</strong> — Tableau (≤ 4 colonnes, ≤ 10 lignes)</p>
+            <p><strong>5. image</strong> — Image <em>offline</em> (data URI <code>data:image/...</code>) ou placeholder <code>IMAGE_PLACEHOLDER_…</code> (aucune URL http/https)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== 1) CONSTANTES DE LAYOUT (16:9) =====
+    const LAYOUT = {
+      width: 10,
+      height: 5.625,
+      margin: 0.5,
+      titleHeight: 0.7,
+      contentGap: 0.2,
+      columnGap: 0.3,
+      bulletIndent: 0.25
+    };
+
+    const ZONES = {
+      title: {
+        x: LAYOUT.margin,
+        y: LAYOUT.margin,
+        w: LAYOUT.width - (2 * LAYOUT.margin),
+        h: LAYOUT.titleHeight
+      },
+      content: {
+        x: LAYOUT.margin + LAYOUT.bulletIndent,
+        y: LAYOUT.margin + LAYOUT.titleHeight + LAYOUT.contentGap,
+        w: LAYOUT.width - (2 * LAYOUT.margin) - LAYOUT.bulletIndent,
+        h: LAYOUT.height - (LAYOUT.margin + LAYOUT.titleHeight + LAYOUT.contentGap + LAYOUT.margin)
+      }
+    };
+
+    const TITLE_MAX_LENGTH = 60;
+    const MAX_BULLET_WORDS = 15;
+    const COLUMN_WORD_LIMIT = 15;
+    const FILENAME_PATTERN = /^[a-z0-9_-][a-z0-9._-]*\.pptx$/i;
+
+    // ===== Helpers =====
+    function isHex6(v) { return typeof v === 'string' && /^[0-9A-Fa-f]{6}$/.test(v); }
+    function countWords(s) { return String(s).trim().split(/\s+/).filter(Boolean).length; }
+    function isDataUri(s) { return typeof s === 'string' && s.startsWith('data:image/'); }
+    function isPlaceholderUri(s) { return typeof s === 'string' && s.startsWith('IMAGE_PLACEHOLDER_'); }
+    function isNonEmptyString(value) { return typeof value === 'string' && value.trim().length > 0; }
+
+    
+    // ✅ AMÉLIORATION v2.0 : Normalisation sécurisée des tables
+    function normalizeTableDataSafe(tableData) {
+      try {
+        if (!Array.isArray(tableData) || tableData.length === 0) {
+          console.warn('⚠️ normalizeTableDataSafe : données invalides, retour placeholder');
+          return [['Erreur'], ['Données invalides']];
+        }
+
+        const normalized = tableData.map((row, rowIndex) => {
+          if (!Array.isArray(row)) {
+            console.warn('⚠️ Ligne non-tableau détectée:', row);
+            return ['Erreur ligne'];
+          }
+          
+          return row.map(cell => {
+            // Gestion des cellules null/undefined
+            if (cell === null || cell === undefined) {
+              return { text: '' };
+            }
+            
+            // Si c'est déjà un objet avec text
+            if (typeof cell === 'object' && cell.text !== undefined) {
+              return cell;
+            }
+            
+            // Conversion en string sécurisée
+            const textValue = String(cell);
+            
+            // Si c'est un header (première ligne), style différent
+            const isHeader = rowIndex === 0;
+            
+            return {
+              text: textValue,
+              options: isHeader ? {
+                fontSize: 14,
+                bold: true,
+                color: 'FFFFFF',
+                fill: '0066CC',
+                align: 'center',
+                valign: 'middle'
+              } : {
+                fontSize: 12,
+                color: '333333',
+                align: 'left',
+                valign: 'middle'
+              }
+            };
+          });
+        });
+
+        return normalized;
+      } catch (error) {
+        console.error('❌ normalizeTableDataSafe : exception', error);
+        return [['Erreur critique'], [error.message]];
+      }
+    }
+
+    function normalizeTableData(rows) {
+      try {
+        return normalizeTableDataSafe(rows);
+      } catch (err) {
+        console.error('Table invalide détectée:', rows, err);
+        return [[{
+          text: 'ERREUR TABLE',
+          options: { bold: true, fill: 'FC8181', color: 'FFFFFF' }
+        }]];
+      }
+    }
+
+    function normalizeTableDataSafe(rows) {
+      if (!Array.isArray(rows)) {
+        throw new Error(`tableData n'est pas un tableau (type: ${typeof rows})`);
+      }
+      if (rows.length === 0) {
+        throw new Error('tableData est un tableau vide');
+      }
+      if (!Array.isArray(rows[0])) {
+        throw new Error(`Première ligne (en-têtes) n'est pas un tableau (type: ${typeof rows[0]})`);
+      }
+      if (rows[0].length === 0) {
+        throw new Error("Ligne d'en-têtes est vide");
+      }
+
+      return rows.map((row, idxRow) => {
+        if (!Array.isArray(row)) {
+          console.warn(`normalizeTableDataSafe: ligne ${idxRow} n'est pas un tableau, conversion en [row]`);
+          row = [row];
+        }
+
+        return row.map((cell, idxCell) => {
+          if (cell && typeof cell === 'object' && !Array.isArray(cell) && 'text' in cell) {
+            return {
+              text: String(cell.text ?? ''),
+              options: cell.options || (idxRow === 0 ? { bold: true, fill: 'E1E1E1', color: '000000' } : {})
+            };
+          }
+
+          let textValue;
+          if (cell === null || cell === undefined) {
+            textValue = '';
+          } else if (typeof cell === 'object') {
+            textValue = JSON.stringify(cell);
+          } else {
+            textValue = String(cell);
+          }
+
+          return {
+            text: textValue,
+            options: idxRow === 0 ? { bold: true, fill: 'E1E1E1', color: '000000' } : {}
+          };
+        });
+      });
+    }
+
+    // ===== 2) VALIDATION JSON COMPLÈTE =====
+    function validateJSON(data) {
+      const errors = [];
+      const warns = [];
+
+      if (!data || typeof data !== 'object') {
+        errors.push('Le JSON doit être un objet valide');
+        return { errors, warns };
+      }
+
+      // Metadata
+      if (!data.metadata) errors.push("Propriété 'metadata' manquante");
+      else {
+        const meta = data.metadata;
+        if (!isNonEmptyString(meta.title)) {
+          errors.push('metadata.title est obligatoire et doit être une chaîne non vide');
+        } else if (meta.title.trim().length > TITLE_MAX_LENGTH) {
+          errors.push(`metadata.title ne peut pas dépasser ${TITLE_MAX_LENGTH} caractères (actuel : ${meta.title.trim().length})`);
+        }
+        if (!isNonEmptyString(meta.fileName)) {
+          errors.push('metadata.fileName est obligatoire et doit être une chaîne non vide');
+        } else if (!FILENAME_PATTERN.test(meta.fileName)) {
+          errors.push('metadata.fileName doit être en minuscules, sans espaces ni accents, et se terminer par .pptx');
+        }
+      }
+
+      // Slides
+      if (!data.slides || !Array.isArray(data.slides)) {
+        errors.push("Propriété 'slides' doit être un tableau");
+        return { errors, warns };
+      }
+      if (data.slides.length === 0) {
+        errors.push("Le tableau 'slides' ne peut pas être vide");
+        return { errors, warns };
+      }
+
+      // Règles globales
+      const validTypes = ['title', 'content', 'twoColumn', 'table', 'image'];
+      if (data.slides[0]?.type !== 'title') {
+        errors.push('La première slide doit être de type "title"');
+      }
+
+      // Dernière slide : recommandation forte → on l’impose ici
+      const last = data.slides[data.slides.length - 1];
+      if (last?.type !== 'content') {
+        errors.push('La dernière slide doit être de type "content" (conclusion + call-to-action)');
+      }
+
+      data.slides.forEach((slide, i) => {
+        const n = i + 1;
+        if (!slide || typeof slide !== 'object') {
+          errors.push(`Slide ${n} : élément invalide (objet attendu)`);
+          return;
+        }
+        if (!slide.type) {
+          errors.push(`Slide ${n} : propriété 'type' manquante`);
+          return;
+        }
+        if (!validTypes.includes(slide.type)) {
+          errors.push(`Slide ${n} : type '${slide.type}' invalide. Types valides : ${validTypes.join(', ')}`);
+          return;
+        }
+
+        // Règles par type
+        switch (slide.type) {
+          case 'title': {
+            if (!isNonEmptyString(slide.title)) {
+              errors.push(`Slide ${n} (title) : 'title' obligatoire et doit être une chaîne non vide`);
+            } else if (slide.title.trim().length > TITLE_MAX_LENGTH) {
+              errors.push(`Slide ${n} (title) : le titre ne peut pas dépasser ${TITLE_MAX_LENGTH} caractères (actuel : ${slide.title.trim().length})`);
+            }
+            if (slide.backgroundColor && !isHex6(slide.backgroundColor)) errors.push(`Slide ${n} : backgroundColor doit être hex 6 (ex: 0066CC)`);
+            if (slide.titleColor && !isHex6(slide.titleColor)) errors.push(`Slide ${n} : titleColor doit être hex 6 (ex: FFFFFF)`);
+            if (slide.subtitleColor && !isHex6(slide.subtitleColor)) errors.push(`Slide ${n} : subtitleColor doit être hex 6`);
+            break;
+          }
+          case 'content': {
+            if (!isNonEmptyString(slide.title)) {
+              errors.push(`Slide ${n} : propriété 'title' manquante ou vide`);
+            } else if (slide.title.trim().length > TITLE_MAX_LENGTH) {
+              errors.push(`Slide ${n} : le titre ne peut pas dépasser ${TITLE_MAX_LENGTH} caractères (actuel : ${slide.title.trim().length})`);
+            }
+            if (!Array.isArray(slide.bullets)) errors.push(`Slide ${n} (content) : 'bullets' doit être un tableau`);
+            else {
+              if (slide.bullets.length < 3 || slide.bullets.length > 5) errors.push(`Slide ${n} (content) : 3 à 5 bullets requis`);
+              slide.bullets.forEach((b, bi) => {
+                if (!isNonEmptyString(b)) {
+                  errors.push(`Slide ${n} (content) bullet ${bi+1} : doit être une chaîne non vide`);
+                  return;
+                }
+                const words = countWords(b);
+                if (words > MAX_BULLET_WORDS) errors.push(`Slide ${n} (content) bullet ${bi+1} : max ${MAX_BULLET_WORDS} mots (actuel : ${words})`);
+              });
+            }
+            break;
+          }
+          case 'twoColumn': {
+            if (!isNonEmptyString(slide.title)) {
+              errors.push(`Slide ${n} : propriété 'title' manquante ou vide`);
+            } else if (slide.title.trim().length > TITLE_MAX_LENGTH) {
+              errors.push(`Slide ${n} : le titre ne peut pas dépasser ${TITLE_MAX_LENGTH} caractères (actuel : ${slide.title.trim().length})`);
+            }
+            if (!Array.isArray(slide.leftContent)) errors.push(`Slide ${n} (twoColumn) : 'leftContent' doit être un tableau`);
+            if (!Array.isArray(slide.rightContent)) errors.push(`Slide ${n} (twoColumn) : 'rightContent' doit être un tableau`);
+            if (Array.isArray(slide.leftContent) && (slide.leftContent.length < 2 || slide.leftContent.length > 4)) errors.push(`Slide ${n} (twoColumn) : 2 à 4 points à gauche`);
+            if (Array.isArray(slide.rightContent) && (slide.rightContent.length < 2 || slide.rightContent.length > 4)) errors.push(`Slide ${n} (twoColumn) : 2 à 4 points à droite`);
+            if (Array.isArray(slide.leftContent)) {
+              slide.leftContent.forEach((item, idx) => {
+                if (!isNonEmptyString(item)) {
+                  errors.push(`Slide ${n} (twoColumn) colonne gauche point ${idx+1} : doit être une chaîne non vide`);
+                  return;
+                }
+                const words = countWords(item);
+                if (words > COLUMN_WORD_LIMIT) errors.push(`Slide ${n} (twoColumn) colonne gauche point ${idx+1} : max ${COLUMN_WORD_LIMIT} mots (actuel : ${words})`);
+              });
+            }
+            if (Array.isArray(slide.rightContent)) {
+              slide.rightContent.forEach((item, idx) => {
+                if (!isNonEmptyString(item)) {
+                  errors.push(`Slide ${n} (twoColumn) colonne droite point ${idx+1} : doit être une chaîne non vide`);
+                  return;
+                }
+                const words = countWords(item);
+                if (words > COLUMN_WORD_LIMIT) errors.push(`Slide ${n} (twoColumn) colonne droite point ${idx+1} : max ${COLUMN_WORD_LIMIT} mots (actuel : ${words})`);
+              });
+            }
+            break;
+          }
+          case 'table': {
+            if (!isNonEmptyString(slide.title)) {
+              errors.push(`Slide ${n} : propriété 'title' manquante ou vide`);
+            } else if (slide.title.trim().length > TITLE_MAX_LENGTH) {
+              errors.push(`Slide ${n} : le titre ne peut pas dépasser ${TITLE_MAX_LENGTH} caractères (actuel : ${slide.title.trim().length})`);
+            }
+
+            if (!slide.tableData) {
+              errors.push(`Slide ${n} (table) : propriété 'tableData' manquante`);
+              break;
+            }
+
+            if (!Array.isArray(slide.tableData)) {
+              errors.push(`Slide ${n} (table) : 'tableData' doit être un tableau (type reçu: ${typeof slide.tableData})`);
+              break;
+            }
+
+            if (slide.tableData.length === 0) {
+              errors.push(`Slide ${n} (table) : 'tableData' ne peut pas être vide`);
+              break;
+            }
+
+            const header = slide.tableData[0];
+
+            if (!Array.isArray(header)) {
+              errors.push(`Slide ${n} (table) : la première ligne (en-têtes) doit être un tableau (type reçu: ${typeof header})`);
+              break;
+            }
+
+            if (header.length === 0) {
+              errors.push(`Slide ${n} (table) : la ligne d'en-têtes ne peut pas être vide`);
+              break;
+            }
+
+            let hasInvalidHeaders = false;
+            header.forEach((cell, idx) => {
+              const cellText = typeof cell === 'object' && cell !== null ? cell.text : cell;
+              if (!isNonEmptyString(cellText)) {
+                errors.push(`Slide ${n} (table) : en-tête colonne ${idx + 1} doit être une chaîne non vide (reçu: ${JSON.stringify(cell)})`);
+                hasInvalidHeaders = true;
+              }
+            });
+
+            if (hasInvalidHeaders) {
+              break;
+            }
+
+            const colCount = header.length;
+
+            if (colCount > 4) {
+              errors.push(`Slide ${n} (table) : maximum 4 colonnes autorisées (actuel : ${colCount})`);
+            }
+
+            if (slide.tableData.length > 10) {
+              errors.push(`Slide ${n} (table) : maximum 10 lignes autorisées (en-têtes inclus, actuel : ${slide.tableData.length})`);
+            }
+
+            slide.tableData.slice(1).forEach((row, idx) => {
+              const rowNum = idx + 2;
+              if (!Array.isArray(row)) {
+                errors.push(`Slide ${n} (table) ligne ${rowNum} : chaque ligne doit être un tableau (type reçu: ${typeof row})`);
+                return;
+              }
+
+              if (row.length !== colCount) {
+                warns.push(`Slide ${n} (table) ligne ${rowNum} : nombre de colonnes incohérent (${row.length} cellules vs ${colCount} en-têtes)`);
+              }
+
+              row.forEach((cell, cellIdx) => {
+                if (cell === null || cell === undefined) {
+                  warns.push(`Slide ${n} (table) ligne ${rowNum} colonne ${cellIdx + 1} : cellule vide/null détectée`);
+                }
+              });
+            });
+
+            try {
+              slide._normalizedTableData = normalizeTableDataSafe(slide.tableData);
+            } catch (normError) {
+              errors.push(`Slide ${n} (table) : échec normalisation des données - ${normError.message}`);
+            }
+
+            break;
+          }
+          case 'image': {
+            if (!isNonEmptyString(slide.title)) {
+              errors.push(`Slide ${n} : propriété 'title' manquante ou vide`);
+            } else if (slide.title.trim().length > TITLE_MAX_LENGTH) {
+              errors.push(`Slide ${n} : le titre ne peut pas dépasser ${TITLE_MAX_LENGTH} caractères (actuel : ${slide.title.trim().length})`);
+            }
+            if (!isNonEmptyString(slide.imagePath)) {
+              errors.push(`Slide ${n} (image) : 'imagePath' manquante`);
+            } else if (!(isDataUri(slide.imagePath) || isPlaceholderUri(slide.imagePath))) {
+              errors.push(`Slide ${n} (image) : imagePath doit être un data URI (data:image/...) ou un placeholder IMAGE_PLACEHOLDER_... (aucune URL http/https)`);
+            }
+            break;
+          }
+        }
+      });
+
+      return { errors, warns };
+    }
+
+    // ===== 3) FONCTIONS CRÉATION DE SLIDES (correctifs v2) =====
+    function createTitleSlide(slide, data) {
+      if (data.backgroundColor) slide.background = { color: data.backgroundColor };
+      const titleY = (LAYOUT.height - 1.5) / 2;
+
+      slide.addText(data.title, {
+        x: LAYOUT.margin,
+        y: titleY,
+        w: LAYOUT.width - (2 * LAYOUT.margin),
+        h: 1.0,
+        fontSize: 44,
+        bold: true,
+        color: data.titleColor || '363636',
+        align: 'center',
+        valign: 'middle'
+      });
+
+      if (data.subtitle) {
+        slide.addText(data.subtitle, {
+          x: LAYOUT.margin,
+          y: titleY + 1.2,
+          w: LAYOUT.width - (2 * LAYOUT.margin),
+          h: 0.6,
+          fontSize: 24,
+          color: data.subtitleColor || '666666',
+          align: 'center',
+          valign: 'middle'
+        });
+      }
+    }
+
+    function createContentSlide(slide, data) {
+      slide.addText(data.title, {
+        ...ZONES.title,
+        fontSize: 32,
+        bold: true,
+        color: '0066cc'
+      });
+
+      const bulletText = data.bullets.map(b => ({
+        text: String(b),
+        options: { bullet: true, fontSize: 18, color: '333333' }
+      }));
+
+      slide.addText(bulletText, {
+        ...ZONES.content,
+        fontSize: 18,
+        color: '333333',
+        valign: 'top'
+      });
+    }
+
+    function createTwoColumnSlide(slide, data) {
+      slide.addText(data.title, {
+        ...ZONES.title,
+        fontSize: 32,
+        bold: true,
+        color: '0066cc'
+      });
+
+      const columnWidth = (ZONES.content.w - LAYOUT.columnGap) / 2;
+
+      const leftText = data.leftContent.map(t => ({
+        text: String(t),
+        options: { bullet: true, fontSize: 16, color: '333333' }
+      }));
+
+      const rightText = data.rightContent.map(t => ({
+        text: String(t),
+        options: { bullet: true, fontSize: 16, color: '333333' }
+      }));
+
+      slide.addText(leftText, {
+        x: ZONES.content.x,
+        y: ZONES.content.y,
+        w: columnWidth,
+        h: ZONES.content.h,
+        valign: 'top'
+      });
+
+      slide.addText(rightText, {
+        x: ZONES.content.x + columnWidth + LAYOUT.columnGap,
+        y: ZONES.content.y,
+        w: columnWidth,
+        h: ZONES.content.h,
+        valign: 'top'
+      });
+    }
+
+    function createTableSlide(slide, data) {
+      slide.addText(data.title, {
+        ...ZONES.title,
+        fontSize: 32,
+        bold: true,
+        color: '0066cc'
+      });
+
+      const sourceTable = data._normalizedTableData || data.tableData;
+
+      if (
+        !Array.isArray(sourceTable) ||
+        sourceTable.length === 0 ||
+        !Array.isArray(sourceTable[0]) ||
+        sourceTable[0].length === 0
+      ) {
+        slide.addText('⚠️ Tableau indisponible\n\nStructure de données invalide détectée.\nVérifiez que tableData commence par un tableau d\'en-têtes non vide.', {
+          x: ZONES.content.x,
+          y: ZONES.content.y,
+          w: ZONES.content.w,
+          h: ZONES.content.h,
+          fontSize: 18,
+          color: 'C53030',
+          align: 'center',
+          valign: 'middle',
+          fill: 'FFF5F5',
+          border: { pt: 2, color: 'FC8181', type: 'dash' }
+        });
+        return;
+      }
+
+            // ✅ AMÉLIORATION v2.0 : Utilisation de la normalisation sécurisée
+      let tableData;
+      try {
+        tableData = normalizeTableDataSafe(sourceTable);
+      } catch (normError) {
+        console.error("Erreur normalisation table:", normError);
+        tableData = [["Erreur"], ["Impossible de normaliser les données"]];
+      }
+
+      const rowHeight = 0.35;
+      const h = Math.min(ZONES.content.h, tableData.length * rowHeight);
+
+      slide.addTable(tableData, {
+        x: ZONES.content.x - LAYOUT.bulletIndent,
+        y: ZONES.content.y,
+        w: ZONES.content.w + LAYOUT.bulletIndent,
+        h,
+        border: { pt: 1, color: 'CFCFCF' },
+        fontSize: 14,
+        color: '333333',
+        valign: 'middle',
+        align: 'left'
+      });
+    }
+
+    function createImageSlide(slide, data) {
+      slide.addText(data.title, {
+        ...ZONES.title,
+        fontSize: 32,
+        bold: true,
+        color: '0066cc'
+      });
+
+      if (!data.imagePath) return;
+
+      if (isDataUri(data.imagePath)) {
+        slide.addImage({
+          data: data.imagePath,
+          x: ZONES.content.x,
+          y: ZONES.content.y,
+          w: ZONES.content.w,
+          h: ZONES.content.h,
+          sizing: {
+            type: 'contain',
+            w: ZONES.content.w,
+            h: ZONES.content.h
+          }
+        });
+      } else if (isPlaceholderUri(data.imagePath)) {
+        const description = data.imagePath.replace('IMAGE_PLACEHOLDER_', '');
+        slide.addText(`[IMAGE À INSÉRER]\n\n${description}`, {
+          x: ZONES.content.x,
+          y: ZONES.content.y,
+          w: ZONES.content.w,
+          h: ZONES.content.h,
+          fontSize: 18,
+          color: '999999',
+          align: 'center',
+          valign: 'middle',
+          fill: 'F5F5F5',
+          border: { pt: 2, color: 'CCCCCC', type: 'dash' }
+        });
+      }
+    }
+
+    // ===== 4) GÉNÉRATION POWERPOINT (progressive + feedback détaillé) =====
+    async function generatePowerPoint() {
+      const errorDiv = document.getElementById('error');
+      const successDiv = document.getElementById('success');
+      const warningDiv = document.getElementById('warning');
+      const btn = document.getElementById('generateBtn');
+      const spin = document.getElementById('genSpin');
+      const label = document.getElementById('genLabel');
+
+      const updateWarningPanel = (list = []) => {
+        if (!warningDiv) return;
+        if (!Array.isArray(list) || list.length === 0) {
+          warningDiv.style.display = 'none';
+          warningDiv.textContent = '';
+        } else {
+          warningDiv.textContent = '⚠️ Avertissements :\n' + list.map(item => '• ' + item).join('\n');
+          warningDiv.style.display = 'block';
+        }
+      };
+
+      if (errorDiv) {
+        errorDiv.removeAttribute('data-autostatus');
+        errorDiv.style.display = 'none';
+        errorDiv.textContent = '';
+      }
+      if (successDiv) {
+        successDiv.style.display = 'none';
+        successDiv.textContent = '';
+      }
+      updateWarningPanel([]);
+
+      let warningsToDisplay = [];
+
+      try {
+        const PptxGenJS = checkPptxGenAvailable();
+
+        const jsonInputEl = document.getElementById('jsonInput');
+        const jsonInput = jsonInputEl ? jsonInputEl.value.trim() : '';
+        if (!jsonInput) {
+          throw new Error('Veuillez coller du contenu JSON avant de générer');
+        }
+
+        let data;
+        try {
+          data = JSON.parse(jsonInput);
+        } catch (e) {
+          throw new Error('JSON invalide : ' + e.message);
+        }
+
+        const { errors, warns } = validateJSON(data);
+        warningsToDisplay = Array.isArray(warns) ? warns.filter(Boolean) : [];
+
+        if (errors.length) {
+          throw new Error('Erreurs de validation :\n' + errors.map(e => '• ' + e).join('\n'));
+        }
+
+        if (btn) btn.disabled = true;
+        if (spin) spin.style.display = 'inline-block';
+        if (label) label.textContent = 'Préparation de la présentation...';
+
+        const pptx = new PptxGenJS();
+        pptx.author = data.metadata.author || 'Auteur';
+        pptx.title = data.metadata.title || '';
+        pptx.company = data.metadata.company || '';
+        pptx.subject = data.metadata.subject || '';
+        pptx.layout = 'LAYOUT_16x9';
+
+        const totalSlides = data.slides.length;
+
+        for (let i = 0; i < totalSlides; i++) {
+          const slideData = data.slides[i];
+
+          if (label) {
+            label.textContent = `Génération slide ${i + 1}/${totalSlides}...`;
+          }
+
+          await new Promise(resolve => setTimeout(resolve, 0));
+
+          const slide = pptx.addSlide();
+          switch (slideData.type) {
+            case 'title':
+              createTitleSlide(slide, slideData);
+              break;
+            case 'content':
+              createContentSlide(slide, slideData);
+              break;
+            case 'twoColumn':
+              createTwoColumnSlide(slide, slideData);
+              break;
+            case 'table':
+              createTableSlide(slide, slideData);
+              break;
+            case 'image':
+              createImageSlide(slide, slideData);
+              break;
+            default:
+              throw new Error(`Type de slide inconnu à l'index ${i}: "${slideData.type}"`);
+          }
+        }
+
+        if (label) {
+          label.textContent = 'Finalisation du fichier...';
+        }
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        const fileName = data.metadata.fileName || `presentation-${Date.now()}.pptx`;
+        await pptx.writeFile({ fileName });
+
+        if (successDiv) {
+          successDiv.textContent = `✓ Présentation générée avec succès : ${fileName}`;
+          successDiv.style.display = 'block';
+        }
+        updateWarningPanel(warningsToDisplay);
+      } catch (err) {
+        if (errorDiv) {
+          errorDiv.textContent = '❌ ' + err.message;
+          errorDiv.style.display = 'block';
+        }
+        updateWarningPanel(warningsToDisplay);
+        console.error('Erreur génération PowerPoint:', err);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+        }
+        if (spin) {
+          spin.style.display = 'none';
+        }
+        if (label) {
+          label.textContent = '🚀 Générer PowerPoint';
+        }
+      }
+    }
+
+    // ===== 5) UI : Prompt + Accordéons =====
+    function togglePrompt() {
+      const box = document.getElementById('promptBox');
+      const txt = document.getElementById('promptText');
+      if (box.style.display === 'none') { box.style.display = 'block'; txt.value = OPTIMAL_PROMPT; }
+      else box.style.display = 'none';
+    }
+    async function copyPrompt() {
+      const txt = document.getElementById('promptText');
+      const fb = document.getElementById('copyFeedback');
+      if (!txt || !fb) return;
+
+      const defaultMessage = fb.dataset.defaultMessage || '✓ Prompt copié dans le presse-papiers !';
+      const fallbackMessage = 'Copie automatique indisponible. Sélectionnez le texte puis utilisez Ctrl+C (Cmd+C sur Mac).';
+      const showFeedback = (message, isError = false) => {
+        fb.textContent = message;
+        fb.style.color = isError ? '#c53030' : '#38a169';
+        fb.style.display = 'block';
+        clearTimeout(fb._timeoutId);
+        fb._timeoutId = window.setTimeout(() => {
+          fb.style.display = 'none';
+          fb.style.color = '#38a169';
+          fb.textContent = defaultMessage;
+        }, 3000);
+      };
+
+      try {
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+          await navigator.clipboard.writeText(txt.value);
+          showFeedback(defaultMessage);
+          return;
+        }
+      } catch (err) {
+        // Continuer vers les mécanismes de secours
+      }
+
+      try {
+        txt.focus();
+        txt.select();
+        if (typeof txt.setSelectionRange === 'function') {
+          txt.setSelectionRange(0, txt.value.length);
+        }
+        const successful = document.execCommand && document.execCommand('copy');
+        if (successful) {
+          showFeedback(defaultMessage);
+        } else {
+          throw new Error('execCommand copy unsuccessful');
+        }
+      } catch (err) {
+        txt.focus();
+        txt.select();
+        if (typeof txt.setSelectionRange === 'function') {
+          txt.setSelectionRange(0, txt.value.length);
+        }
+        showFeedback(fallbackMessage, true);
+      }
+    }
+    function toggleCollapsible(header) {
+      const content = header.nextElementSibling; const arrow = header.querySelector('span:last-child');
+      content.classList.toggle('active'); arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
+    }
+
+    // ===== 6) PROMPT OPTIMAL (corrigé & aligné) =====
+    const OPTIMAL_PROMPT = (() => {
+      const promptNode = document.getElementById('optimalPromptV2');
+      if (promptNode && typeof promptNode.textContent === 'string') {
+        return promptNode.textContent.trim();
+      }
+      return "Prompt optimal indisponible : vérifiez la balise #optimalPromptV2.";
+    })();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const errorDiv = document.getElementById('error');
+    const generateBtn = document.getElementById('generateBtn');
+    let pollId = null;
+    let hasLoggedTimeout = false;
+    const startTime = Date.now();
+
+    const clearAutoStatus = () => {
+      if (errorDiv && errorDiv.dataset.autostatus === 'pptx-missing') {
+        errorDiv.style.display = 'none';
+        errorDiv.textContent = '';
+        delete errorDiv.dataset.autostatus;
+      }
+    };
+
+    const enableGenerator = () => {
+      if (generateBtn) {
+        generateBtn.disabled = false;
+        generateBtn.removeAttribute('aria-disabled');
+      }
+      clearAutoStatus();
+    };
+
+    const attempt = () => {
+      try {
+        checkPptxGenAvailable();
+        enableGenerator();
+        if (pollId) {
+          clearInterval(pollId);
+          pollId = null;
+        }
+        return true;
+      } catch (err) {
+        if (generateBtn) {
+          generateBtn.disabled = true;
+          generateBtn.setAttribute('aria-disabled', 'true');
+        }
+        const elapsed = Date.now() - startTime;
+        const message = elapsed > 5000
+          ? '❌ Bibliothèque PptxGenJS non détectée. Vérifiez que "pptxgen.bundle.js" est présent localement et rechargez la page.'
+          : 'ℹ️ Chargement de la bibliothèque PptxGenJS...';
+        if (errorDiv) {
+          errorDiv.textContent = message;
+          errorDiv.style.display = 'block';
+          errorDiv.dataset.autostatus = 'pptx-missing';
+        }
+        if (elapsed > 15000 && pollId) {
+          clearInterval(pollId);
+          pollId = null;
+          if (!hasLoggedTimeout) {
+            console.error(err);
+            hasLoggedTimeout = true;
+          }
+        }
+        return false;
+      }
+    };
+
+    if (!attempt()) {
+      pollId = setInterval(() => {
+        if (attempt()) {
+          if (pollId) {
+            clearInterval(pollId);
+            pollId = null;
+          }
+          return;
+        }
+        if (Date.now() - startTime > 15000 && pollId) {
+          clearInterval(pollId);
+          pollId = null;
+        }
+      }, 300);
+    }
+  });
+  </script>
+</body>
+</html>

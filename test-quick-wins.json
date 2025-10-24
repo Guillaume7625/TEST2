@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "title": "Test Quick Wins",
+    "author": "AI Assistant",
+    "company": "Test Corp",
+    "fileName": "test-quick-wins.pptx"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": "Test des Quick Wins Visuels",
+      "subtitle": "Alternance tableaux, troncature bullets, headers colorés"
+    },
+    {
+      "type": "content",
+      "title": "Test Limite 5 Bullets + Troncature",
+      "bullets": [
+        "Premier bullet normal avec texte court",
+        "Deuxième bullet avec un texte très très très long qui dépasse largement les quinze mots recommandés et devrait être tronqué automatiquement",
+        "Troisième bullet normal",
+        "Quatrième bullet normal",
+        "Cinquième bullet normal",
+        "Sixième bullet qui ne devrait PAS apparaître car limité à 5",
+        "Septième bullet qui ne devrait PAS apparaître non plus"
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Test Header Coloré (Fond Bleu)",
+      "bullets": [
+        "Ce header devrait avoir un fond bleu",
+        "Avec du texte blanc",
+        "Pour un look professionnel"
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Test Alternance Lignes Tableau",
+      "tableData": [
+        ["Produit", "Q1", "Q2", "Q3"],
+        ["Service A", "100k€", "120k€", "150k€"],
+        ["Service B", "80k€", "90k€", "100k€"],
+        ["Service C", "60k€", "70k€", "80k€"],
+        ["Service D", "40k€", "50k€", "60k€"],
+        ["Total", "280k€", "330k€", "390k€"]
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Conclusion - Quick Wins Implémentés",
+      "bullets": [
+        "Alternance de lignes dans tableaux avec header bleu",
+        "Limite automatique à 5 bullets maximum",
+        "Troncature intelligente à 15 mots avec ...",
+        "Headers colorés avec fond bleu et texte blanc"
+      ]
+    }
+  ]
+}

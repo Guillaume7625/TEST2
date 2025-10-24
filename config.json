@@ -1,0 +1,29 @@
+{
+  "app": {
+    "name": "PowerPoint Generator Offline",
+    "version": "2.0.0",
+    "author": "Assistant IA Genspark"
+  },
+  "layout": {
+    "width": 10,
+    "height": 5.625,
+    "format": "16:9"
+  },
+  "validation": {
+    "titleMaxLength": 60,
+    "maxBulletWords": 15,
+    "minBullets": 3,
+    "maxBullets": 5,
+    "maxTableColumns": 4,
+    "maxTableRows": 10
+  },
+  "ui": {
+    "defaultLanguage": "fr",
+    "theme": "default"
+  },
+  "build": {
+    "bundlePath": "./pptxgen.bundle.js",
+    "outputPath": "./build/index.html",
+    "placeholder": "<!--PPTX_BUNDLE_BASE64-->"
+  }
+}

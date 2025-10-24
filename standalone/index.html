@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Générateur PowerPoint Professionnel (Offline)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎯 Générateur PowerPoint Professionnel</h1>
+      <p>Créez des présentations de qualité en quelques secondes — 100% hors‑ligne</p>
+    </header>
+
+    <div class="content">
+      <div class="instructions">
+        <h2>📋 Comment utiliser ce générateur</h2>
+        <ol>
+          <li><strong>Affichez et copiez</strong> le prompt optimal (bouton ci-dessous), renseignez vos variables (SUJET, AUDIENCE, ...).</li>
+          <li><strong>Collez</strong> le JSON généré par l'IA dans la zone de texte.</li>
+          <li><strong>Cliquez</strong> sur « Générer PowerPoint » pour obtenir le <code>.pptx</code>.</li>
+        </ol>
+      </div>
+
+      <div class="section">
+        <button class="btn" onclick="togglePrompt()">📝 Afficher le Prompt Optimal</button>
+        <div id="promptBox" class="prompt-box" style="display:none;">
+          <div class="section-title">Prompt à copier dans votre IA :</div>
+          <textarea id="promptText" readonly></textarea>
+          <button class="btn copy-btn" onclick="copyPrompt()">📋 Copier le Prompt</button>
+          <div id="copyFeedback" role="status" aria-live="polite" data-default-message="✓ Prompt copié dans le presse‑papier !">✓ Prompt copié dans le presse‑papier !</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">📄 Collez ici le JSON généré par l'IA :</div>
+        <textarea id="jsonInput" placeholder='Collez votre JSON ici...'></textarea>
+      </div>
+
+      <div class="section">
+        <button id="generateBtn" class="btn btn-primary" onclick="generatePowerPoint()">
+          <span id="genLabel">🚀 Générer PowerPoint</span>
+          <span id="genSpin" style="display:none;" class="spinner"></span>
+        </button>
+      </div>
+
+      <div id="error" class="alert alert-error" role="alert" aria-live="assertive"></div>
+      <div id="success" class="alert alert-success" role="status" aria-live="polite"></div>
+      <div id="warning" class="alert alert-warning" role="status" aria-live="polite"></div>
+
+      <div class="collapsible">
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+          <span>💡 Exemple JSON Minimal</span><span>▼</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="collapsible-body">
+<pre>{
+  "metadata": {
+    "title": "Ma Présentation",
+    "author": "Votre Nom",
+    "company": "Votre Organisation",
+    "fileName": "ma-presentation.pptx"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": "Titre Principal",
+      "subtitle": "Sous-titre descriptif",
+      "backgroundColor": "0066CC",
+      "titleColor": "FFFFFF"
+    },
+    {
+      "type": "content",
+      "title": "Points Clés",
+      "bullets": [
+        "Définir l'objectif de la présentation",
+        "Structurer le message en 3 points",
+        "Clore avec un appel à l'action"
+      ]
+    }
+  ]
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible">
+        <div class="collapsible-header" onclick="toggleCollapsible(this)">
+          <span>🔧 Types de Slides Supportés</span><span>▼</span>
+        </div>
+        <div class="collapsible-content">
+          <div class="collapsible-body">
+            <p><strong>1. title</strong> — Page de titre (obligatoirement la 1ʳᵉ slide)</p>
+            <p><strong>2. content</strong> — Points (3 à 5 bullets, ≤ 15 mots chacun)</p>
+            <p><strong>3. twoColumn</strong> — Deux colonnes (2 à 4 points par colonne)</p>
+            <p><strong>4. table</strong> — Tableau (≤ 4 colonnes, ≤ 10 lignes)</p>
+            <p><strong>5. image</strong> — Image <em>offline</em> (data URI <code>data:image/...</code>) ou placeholder <code>IMAGE_PLACEHOLDER_…</code></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Bundle (includes PptxGenJS) -->
+  <script src="bundle.js"></script>
+</body>
+</html>

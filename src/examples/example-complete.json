@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "title": "Stratégie Digitale 2025",
+    "author": "Jean Dupont",
+    "company": "TechCorp",
+    "subject": "Transformation numérique",
+    "fileName": "strategie-digitale-2025.pptx"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": "Stratégie Digitale 2025",
+      "subtitle": "Accélérer notre transformation",
+      "backgroundColor": "0066CC",
+      "titleColor": "FFFFFF",
+      "subtitleColor": "E0E0E0"
+    },
+    {
+      "type": "content",
+      "title": "Contexte et Enjeux",
+      "bullets": [
+        "Croissance du marché digital de 45% depuis 2023",
+        "Nécessité de différenciation face à la concurrence",
+        "Attentes clients vers l'expérience personnalisée",
+        "ROI mesurable requis sous 6 mois"
+      ]
+    },
+    {
+      "type": "twoColumn",
+      "title": "Situation Actuelle vs Vision 2025",
+      "leftContent": [
+        "Présence limitée aux réseaux sociaux classiques",
+        "Taux de conversion moyen de 2.3%",
+        "Budget dispersé sur 12 canaux"
+      ],
+      "rightContent": [
+        "Écosystème digital omnicanal cohérent",
+        "Objectif conversion à 5% d'ici T2 2025",
+        "Budget concentré sur 5 canaux à fort ROI"
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Comparaison Canaux Digitaux",
+      "tableData": [
+        ["Canal", "Coût Acquisition", "ROI", "Priorité"],
+        ["SEO", "45€", "320%", "Haute"],
+        ["Google Ads", "78€", "180%", "Haute"],
+        ["LinkedIn", "125€", "150%", "Moyenne"],
+        ["Facebook", "52€", "95%", "Faible"]
+      ]
+    },
+    {
+      "type": "image",
+      "title": "Projection Croissance 2025-2027",
+      "imagePath": "IMAGE_PLACEHOLDER_graphique-courbe-projection-croissance"
+    },
+    {
+      "type": "content",
+      "title": "Plan d'Action",
+      "bullets": [
+        "Optimiser SEO pour doubler le trafic organique",
+        "Lancer campagnes Google Ads ciblées avec A/B testing",
+        "Déployer plateforme CRM pour personnalisation",
+        "Atteindre 5M€ de CA digital fin 2025"
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Prochaines Étapes",
+      "bullets": [
+        "Validation budget 450K€ avant fin du mois",
+        "Recrutement Growth Hacker senior sous 6 semaines",
+        "Lancement campagne pilote dès le 15 janvier",
+        "Suivi mensuel des KPIs et ajustements"
+      ]
+    }
+  ]
+}

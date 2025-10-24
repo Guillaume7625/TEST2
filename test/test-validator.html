@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tests - Validateur JSON</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f5f7fa;
+    }
+    h1 { color: #2d3748; }
+    .test-result {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border-left: 4px solid #cbd5e0;
+    }
+    .test-result.pass {
+      border-left-color: #48bb78;
+      background: #f0fff4;
+    }
+    .test-result.fail {
+      border-left-color: #fc8181;
+      background: #fff5f5;
+    }
+    .test-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .test-details {
+      font-size: 14px;
+      color: #4a5568;
+    }
+    .summary {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .summary h2 {
+      margin-top: 0;
+    }
+    pre {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Tests - Validateur JSON</h1>
+  <div id="summary" class="summary"></div>
+  <div id="results"></div>
+
+  <script type="module">
+    import { validateJSON } from '../src/js/validator.js';
+
+    const results = [];
+
+    function runTest(name, jsonData, expectedErrors, expectedWarnings = []) {
+      const result = validateJSON(jsonData);
+      const passErrors = result.errors.length === expectedErrors;
+      const passWarnings = result.warns.length === expectedWarnings.length;
+      const pass = passErrors && passWarnings;
+
+      results.push({
+        name,
+        pass,
+        errors: result.errors,
+        warns: result.warns,
+        expectedErrors,
+        expectedWarnings
+      });
+
+      return pass;
+    }
+
+    // === Test Suite ===
+
+    // Test 1: Valid minimal JSON
+    runTest(
+      'Valid minimal JSON',
+      {
+        metadata: {
+          title: 'Test',
+          fileName: 'test.pptx'
+        },
+        slides: [
+          { type: 'title', title: 'Test Title' },
+          { type: 'content', title: 'Content', bullets: ['A', 'B', 'C'] }
+        ]
+      },
+      0,
+      []
+    );
+
+    // Test 2: Missing metadata
+    runTest(
+      'Missing metadata',
+      {
+        slides: [
+          { type: 'title', title: 'Test' }
+        ]
+      },
+      1,
+      []
+    );
+
+    // Test 3: Invalid first slide type
+    runTest(
+      'First slide not type "title"',
+      {
+        metadata: { title: 'Test', fileName: 'test.pptx' },
+        slides: [
+          { type: 'content', title: 'Wrong', bullets: ['A', 'B', 'C'] }
+        ]
+      },
+      2,
+      []
+    );
+
+    // Test 4: Table with invalid structure
+    runTest(
+      'Table with empty tableData',
+      {
+        metadata: { title: 'Test', fileName: 'test.pptx' },
+        slides: [
+          { type: 'title', title: 'Test' },
+          { type: 'table', title: 'Data', tableData: [] },
+          { type: 'content', title: 'End', bullets: ['A', 'B', 'C'] }
+        ]
+      },
+      1,
+      []
+    );
+
+    // Test 5: Valid table
+    runTest(
+      'Valid table',
+      {
+        metadata: { title: 'Test', fileName: 'test.pptx' },
+        slides: [
+          { type: 'title', title: 'Test' },
+          {
+            type: 'table',
+            title: 'Data Table',
+            tableData: [
+              ['Header1', 'Header2'],
+              ['Value1', 'Value2']
+            ]
+          },
+          { type: 'content', title: 'End', bullets: ['A', 'B', 'C'] }
+        ]
+      },
+      0,
+      []
+    );
+
+    // Test 6: Title too long
+    runTest(
+      'Title exceeds 60 characters',
+      {
+        metadata: {
+          title: 'This is a very long title that definitely exceeds the maximum allowed limit of sixty characters',
+          fileName: 'test.pptx'
+        },
+        slides: [
+          { type: 'title', title: 'Test' },
+          { type: 'content', title: 'End', bullets: ['A', 'B', 'C'] }
+        ]
+      },
+      1,
+      []
+    );
+
+    // Test 7: Content with wrong bullet count
+    runTest(
+      'Content with only 2 bullets (min 3)',
+      {
+        metadata: { title: 'Test', fileName: 'test.pptx' },
+        slides: [
+          { type: 'title', title: 'Test' },
+          { type: 'content', title: 'Content', bullets: ['A', 'B'] }
+        ]
+      },
+      2,
+      []
+    );
+
+    // Test 8: TwoColumn validation
+    runTest(
+      'Valid two-column slide',
+      {
+        metadata: { title: 'Test', fileName: 'test.pptx' },
+        slides: [
+          { type: 'title', title: 'Test' },
+          {
+            type: 'twoColumn',
+            title: 'Comparison',
+            leftContent: ['Left 1', 'Left 2'],
+            rightContent: ['Right 1', 'Right 2']
+          },
+          { type: 'content', title: 'End', bullets: ['A', 'B', 'C'] }
+        ]
+      },
+      0,
+      []
+    );
+
+    // === Display Results ===
+
+    const resultsDiv = document.getElementById('results');
+    const summaryDiv = document.getElementById('summary');
+
+    const passCount = results.filter(r => r.pass).length;
+    const failCount = results.length - passCount;
+
+    summaryDiv.innerHTML = `
+      <h2>Summary</h2>
+      <p><strong>Total:</strong> ${results.length} tests</p>
+      <p><strong>✅ Passed:</strong> ${passCount}</p>
+      <p><strong>❌ Failed:</strong> ${failCount}</p>
+    `;
+
+    results.forEach(result => {
+      const div = document.createElement('div');
+      div.className = `test-result ${result.pass ? 'pass' : 'fail'}`;
+      
+      let html = `<div class="test-name">${result.pass ? '✅' : '❌'} ${result.name}</div>`;
+      html += `<div class="test-details">`;
+      html += `Expected errors: ${result.expectedErrors}, Got: ${result.errors.length}<br>`;
+      
+      if (!result.pass) {
+        if (result.errors.length > 0) {
+          html += `<strong>Errors:</strong><pre>${JSON.stringify(result.errors, null, 2)}</pre>`;
+        }
+        if (result.warns.length > 0) {
+          html += `<strong>Warnings:</strong><pre>${JSON.stringify(result.warns, null, 2)}</pre>`;
+        }
+      }
+      
+      html += `</div>`;
+      div.innerHTML = html;
+      resultsDiv.appendChild(div);
+    });
+  </script>
+</body>
+</html>

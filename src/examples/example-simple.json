@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "title": "Présentation Simple",
+    "author": "Utilisateur Test",
+    "company": "Ma Société",
+    "subject": "Test de génération",
+    "fileName": "presentation-simple.pptx"
+  },
+  "slides": [
+    {
+      "type": "title",
+      "title": "Ma Première Présentation",
+      "subtitle": "Générée automatiquement",
+      "backgroundColor": "0066CC",
+      "titleColor": "FFFFFF"
+    },
+    {
+      "type": "content",
+      "title": "Points Importants",
+      "bullets": [
+        "Premier point essentiel à retenir",
+        "Deuxième élément de réflexion",
+        "Troisième argument convaincant"
+      ]
+    },
+    {
+      "type": "content",
+      "title": "Conclusion",
+      "bullets": [
+        "Résumé des points principaux",
+        "Prochaines étapes à suivre",
+        "Contact et questions"
+      ]
+    }
+  ]
+}

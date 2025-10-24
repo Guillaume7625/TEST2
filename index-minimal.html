@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PowerPoint Generator</title>
+  
+  <!-- PptxGenJS Bundle Data (base64 embedded or fallback to external file) -->
+  <script id="pptxgen-bundle-data" type="application/octet-stream"><!--PPTX_BUNDLE_BASE64--></script>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="./src/css/styles-minimal.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header Minimal -->
+    <header class="header">
+      <h1>PowerPoint Generator</h1>
+      <p>Créez des présentations professionnelles en 3 étapes</p>
+    </header>
+
+    <main class="container">
+      <!-- Section 1: Prompt -->
+      <section class="section prompt-section">
+        <div class="section-header">
+          <h2>1. Copiez le prompt</h2>
+          <button class="btn-copy" onclick="copyPrompt()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copier
+          </button>
+        </div>
+        <div class="prompt-box" id="promptBox">
+          <pre id="promptText"></pre>
+        </div>
+        <div id="copyFeedback" class="feedback">✓ Copié dans le presse-papier</div>
+      </section>
+
+      <!-- Section 2: JSON Input -->
+      <section class="section json-section">
+        <div class="section-header">
+          <h2>2. Collez le JSON généré</h2>
+          <button class="btn-validate" onclick="validateJSONOnly()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Valider
+          </button>
+        </div>
+        <textarea 
+          id="jsonInput" 
+          placeholder='Collez ici le JSON généré par l'IA...
+Exemple:
+{
+  "metadata": {
+    "title": "Ma Présentation",
+    "author": "Votre Nom",
+    "fileName": "presentation.pptx"
+  },
+  "slides": [...]
+}'></textarea>
+      </section>
+
+      <!-- Section 3: Generate Button -->
+      <section class="section generate-section">
+        <button id="generateBtn" class="btn-generate" onclick="generatePowerPoint()">
+          <span id="genLabel">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Générer PowerPoint
+          </span>
+          <span id="genSpin" style="display:none;" class="spinner"></span>
+        </button>
+      </section>
+
+      <!-- Alerts -->
+      <div id="error" class="alert alert-error"></div>
+      <div id="success" class="alert alert-success"></div>
+      <div id="warning" class="alert alert-warning"></div>
+    </main>
+
+    <!-- Footer Minimal -->
+    <footer class="footer">
+      <p>v2.2 • 100% offline • <a href="https://github.com/Guillaume7625/TEST2" target="_blank">GitHub</a></p>
+    </footer>
+  </div>
+
+  <!-- Application JavaScript (ES Modules) -->
+  <script type="module" src="./src/js/app.js"></script>
+</body>
+</html>
